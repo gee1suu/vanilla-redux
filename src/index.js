@@ -6,13 +6,17 @@ const number = document.querySelector("span");
 
 number.innerText = 0;
 
+const ADD = "ADD";
+const MINUS = "MINUS";
+
 const countModifier = (count = 0, action) => {
-  if (action.type === "ADD") {
-    return ++count;
-  } else if (action.type === "MINUS") {
-    return --count;
-  } else {
-    return count;
+  switch (action.type) {
+    case ADD:
+      return ++count;
+    case MINUS:
+      return --count;
+    default:
+      return count;
   }
 };
 
@@ -23,8 +27,8 @@ const countStore = configureStore({
 const onChange = () => (number.innerText = countStore.getState());
 countStore.subscribe(onChange);
 
-const handleAdd = () => countStore.dispatch({ type: "ADD" });
-const handleMinus = () => countStore.dispatch({ type: "MINUS" });
+const handleAdd = () => countStore.dispatch({ type: ADD });
+const handleMinus = () => countStore.dispatch({ type: MINUS });
 
 add.addEventListener("click", handleAdd);
 minus.addEventListener("click", handleMinus);
