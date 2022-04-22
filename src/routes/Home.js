@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
-export default function Home() {
+function Home() {
+  const toDos = useSelector((state) => state);
   const [text, setText] = useState("");
   function onChange(e) {
     setText(e.target.value);
@@ -23,7 +25,9 @@ export default function Home() {
         />
         <button>Add</button>
       </form>
-      <ul></ul>
+      <ul>{JSON.stringify(toDos)}</ul>
     </>
   );
 }
+
+export default Home;
